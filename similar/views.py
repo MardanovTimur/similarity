@@ -1,7 +1,11 @@
 from django.http.response import HttpResponse
 from django.shortcuts import render
+
 from similar.models import Course, User
 
+from django.views.generic.list import ListView
+
+from similar.models import Course
 
 def index(request, *args, **kwargs):
     ctx = {}
@@ -17,3 +21,9 @@ def index(request, *args, **kwargs):
         for course in courses:
             print(course.id)
     return render(request, 'index.html', ctx)
+
+
+
+class UserList(ListView):
+    model = User
+    template_name = 'users.html'

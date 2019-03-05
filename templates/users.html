@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Page Title</title>
+  </head>
+<body>
+
+  <h1>User courses</h1>
+  {% for user in object_list %}
+    <p style="font-family: fantasy;">{{user.username}}</p>
+    <p>Courses: </p>
+    {% for course in user.course.all %}
+      <p style="margin-left: 30px;">{{ course.name }}</p>
+    {% endfor %}
+  {% endfor %}
+
+
+
+</body>
+</html>
