@@ -12,7 +12,7 @@
     <input type="submit" name='but' value="Send"/>
     <input name="username" type="text" id="username"/>
     {% for course in courses %}
-        <p><input type="checkbox" name="courses_{{ course.id }}"/>{{ course.name }}</p>
+    <p><input type="checkbox" name="courses" value="{{course.id}}">{{ course.name }}</p>
     {% endfor %}
 
 
