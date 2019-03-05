@@ -1,4 +1,3 @@
-from django.http.response import HttpResponse
 from django.shortcuts import render
 from similar.models import Course, User
 
@@ -9,11 +8,10 @@ def index(request, *args, **kwargs):
     ctx['courses'] = courses
     if request.method == "POST":
         name = request.POST['username']
-        for u in User.objects.all():
-            print(u.username)
-        user = User.objects.create_user(username=name)
+        user = User(username=name)
         user.save()
-        courses = Course.objects.all()
         for course in courses:
-            print(course.id)
+            print(request.POST["courses_%s" % course.id])
+            # user.course.add(Course.objects.get(id=course))
+
     return render(request, 'index.html', ctx)
