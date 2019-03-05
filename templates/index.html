@@ -8,12 +8,12 @@
   <h1>Courses similarity</h1>
 
   <form method="POST">
-
     <input name="username" type="text" id="username"/>
     {% for course in courses %}
-      <p><input type="checkbox" name="{{course.id}}" value="{{course.name}}"> 1417</p>
+      <p><input type="checkbox" name="{{course.id}}">{{course.name}}</p>
     {% endfor %}
-    
+
+    <input type="button" name='but' value="Send"/>
   </form>
 
 
