@@ -1,6 +1,10 @@
 from django.shortcuts import render
+
 from similar.models import Course, User
 
+from django.views.generic.list import ListView
+
+from similar.models import Course
 
 def index(request, *args, **kwargs):
     ctx = {}
@@ -15,3 +19,9 @@ def index(request, *args, **kwargs):
             # user.course.add(Course.objects.get(id=course))
 
     return render(request, 'index.html', ctx)
+
+
+
+class UserList(ListView):
+    model = User
+    template_name = 'users.html'
