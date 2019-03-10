@@ -38,10 +38,10 @@ def recom(user_id):
             else:
                 vector.append(0)
         friends[user.username] = (get_mera_value(vector, user_vector), user.id)
-        if get_mera_value(vector, user_vector) > 0.5:
+        if get_mera_value(vector, user_vector) >= 0.5:
             print(user_courses)
             print(user.course.all())
 
             result.extend(set(user.course.all()).difference(set(set(user_courses) & set(user.course.all()))))
     print("result", set(result))
-    return result, dict(sorted(friends.items(), key=lambda x: x[1][0], reverse=True))
+    return set(result), dict(sorted(friends.items(), key=lambda x: x[1][0], reverse=True))

@@ -10,7 +10,12 @@ def index(request, *args, **kwargs):
     courses = Course.objects.filter()[:10]
     ctx['courses'] = courses
     if request.method == "POST":
-        search = request.POST.data['username']
+        name = request.POST['username']
+        user = User(username=name)
+        user.save()
+        for course_id in request.POST.getlist('courses'):
+            course = Course.objects.get(id=int(course_id))
+            user.course.add(course)
     return render(request, 'index.html', ctx)
 
 
