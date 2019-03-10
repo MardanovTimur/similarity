@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>От кого : <b>{{ name1 }}</b></p>
+<p>Кому : <b>{{ name2 }}</b></p>
+<ul>
+    {% for course in courses %}
+        <li>{{ course.name }}</li>
+    {% endfor %}
+</ul>
+</body>
+</html>

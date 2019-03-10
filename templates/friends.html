@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<b>{{ user.username }} </b> :
+{% for friend, value in friends %}
+    <p>{{ friend }} : {{ value.0 }} <a href="{% url 'indrecom' value.1 user.id %}">Рекомендации</a></p>
+{% endfor %}
+</body>
+</html>

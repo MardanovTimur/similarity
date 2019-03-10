@@ -8,6 +8,8 @@
   <h1>User courses</h1>
   {% for user in object_list %}
     <p style="font-family: fantasy;">{{user.username}}</p>
+      <p><a href="{% url 'recom' user.id %}">Рекомендации</a></p>
+      <p><a href="{% url 'friends' user.id %}">Схожесть с другими</a></p>
     <p>Courses: </p>
     {% for course in user.course.all %}
       <p style="margin-left: 30px;">{{ course.name }}</p>
