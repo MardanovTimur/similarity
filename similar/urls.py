@@ -11,4 +11,6 @@ urlpatterns = [
     url(r'^friends/(?P<id>[0-9]+)$', views.user_friends, name="friends"),
     url(r'^users$', views.users, name="recom"),
     url(r'^indrecom/from/(?P<from_id>[0-9]+)/to/(?P<to_id>[0-9]+)$', views.individual_recom, name="indrecom"),
+    url(r'^indrecom/from/(?P<from_id>[0-9]+)/to/(?P<to_id>[0-9]+)$', views.individual_recom, name="indrecom"),
+    url(r'^matrix$', views.matrix, name='matrix')
 ]

@@ -1,8 +1,8 @@
 from django.http.response import HttpResponse
 from django.shortcuts import render
 
-from similar.lib import recom
-from similar.models import Course, User
+from similar.lib import recom, mera_between_two
+from similar.models import Course, User, MeraValue
 
 
 def index(request, *args, **kwargs):
@@ -16,6 +16,11 @@ def index(request, *args, **kwargs):
         for course_id in request.POST.getlist('courses'):
             course = Course.objects.get(id=int(course_id))
             user.course.add(course)
+        for other_user in User.objects.exclude(id=user.id):
+            mera_value = mera_between_two(other_user, user)
+            MeraValue.objects.create(user_1=other_user, user_2=user, value=mera_value)
+            MeraValue.objects.create(user_1=user, user_2=other_user, value=mera_value)
+        MeraValue.objects.create(user_1=user, user_2=user, value=1)
     return render(request, 'index.html', ctx)
 
 
@@ -43,3 +48,14 @@ def individual_recom(request, from_id, to_id):
         set(set(user_with_recoms.course.all()) & set(user.course.all())))
     return render(request, 'individual_recom.html',
                   {'name1': user_with_recoms.username, 'name2': user.username, 'courses': res})
+
+
+def matrix(request):
+    users = {}
+    for user1 in User.objects.all():
+        users[user1.username] = []
+        for user2 in User.objects.all():
+            mera_value = MeraValue.objects.get(user_1=user1, user_2=user2).value
+            users[user1.username].append((round(mera_value, 2), user1.id, user2.id))
+    print(users)
+    return render(request, 'matrix.html', {'matrix': users, 'users': User.objects.all()})

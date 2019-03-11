@@ -1,4 +1,4 @@
-from similar.models import User, Course
+from similar.models import User, Course, MeraValue
 
 
 def get_mera_value(likes1, likes2):
@@ -15,6 +15,22 @@ def get_mera_value(likes1, likes2):
     coef1 = 3 * a / (3 * a + b + c)
     coef2 = a / (a + b + c)
     return coef2
+
+
+def mera_between_two(user1, user2):
+    user1_vector = []
+    user2_vector = []
+    courses = Course.objects.all()[:10]
+    for course in courses:
+        if course in user1.course.all():
+            user1_vector.append(1)
+        else:
+            user1_vector.append(0)
+        if course in user2.course.all():
+            user2_vector.append(1)
+        else:
+            user2_vector.append(0)
+    return get_mera_value(user1_vector, user2_vector)
 
 
 def recom(user_id):
@@ -45,3 +61,5 @@ def recom(user_id):
             result.extend(set(user.course.all()).difference(set(set(user_courses) & set(user.course.all()))))
     print("result", set(result))
     return set(result), dict(sorted(friends.items(), key=lambda x: x[1][0], reverse=True))
+
+

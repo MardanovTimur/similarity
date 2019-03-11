@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>Матрица схожести</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+<body>
+<br>
+<br>
+<div class="container">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            {% for user in users %}
+                <th scope="col">{{ user.username }}</th>
+            {% endfor %}
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for user_name, values in matrix.items %}
+            <tr>
+                <td><b>{{ user_name }}</b></td>
+                {% for value in values %}
+                    <td><a href="{% url 'indrecom' value.2 value.1 %}">{{ value.0 }}</a></td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+        </tbody>
+
+    </table>
+</div>
+</body>
+</html>
